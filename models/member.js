@@ -11,6 +11,7 @@ const memberSchema = mongoose.Schema(
     email: { type: String, required: true, unique: true, validate: [isEmail] },
     phone: { type: String, required: true },
     gender: { type: String, required: true },
+    date: { type: String, required: true },
   },
   { timestamps: true }
 );

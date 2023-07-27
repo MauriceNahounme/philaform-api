@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { isEmail } = require("validator");
 
-const adminSchema = mongoose.Schema(
+const userSchema = mongoose.Schema(
   {
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
@@ -12,4 +12,4 @@ const adminSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Admin", adminSchema);
+module.exports = mongoose.model("User", userSchema);

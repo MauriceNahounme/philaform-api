@@ -1,17 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
     origin: "https://philaform.netlify.app",
+    credentials: true,
   })
 );
 
 // Import des routers
+const { checkUser, requireAuth } = require("./controllers/auth");
 const userRouter = require("./routes/user");
 const memberRouter = require("./routes/member");
 
@@ -27,17 +31,20 @@ mongoose
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
+app.use(function (req, res, next) {
+  res.header("Content-Type", "application/json;charset=UTF-8");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
+});
+
+//Auth
+app.get("*", checkUser);
+app.get("/jwt", requireAuth, (req, res) => {
+  res.status(200).send(res.locals.user._id);
 });
 
 //Routage
