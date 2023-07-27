@@ -112,6 +112,7 @@ exports.login = async (req, res, next) => {
         httpOnly: true,
         maxAge: maxAge,
         secure: true,
+        sameSite: "none",
       });
       res.status(200).json({ user: user._id });
     });
