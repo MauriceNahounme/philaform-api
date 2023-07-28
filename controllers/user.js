@@ -95,7 +95,7 @@ exports.login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    const maxAge = 720 * 60 * 60 * 1000;
+    const maxAge = 1 * 60 * 60 * 1000;
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
