@@ -102,7 +102,7 @@ exports.login = async (req, res, next) => {
 
     bcrypt.compare(req.body.password, user.password).then((valid) => {
       if (!valid) {
-        return res.status(404).json({ message: "Mot de passe incorrect" });
+        return res.status(404).json({ message: "Mot de passe incorrec" });
       }
 
       const token = jwt.sign({ userID: user._id }, process.env.TOKEN_SECRET, {
