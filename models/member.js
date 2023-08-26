@@ -5,12 +5,12 @@ const memberSchema = mongoose.Schema(
   {
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
-    street: { type: String, required: true },
-    postalCode: { type: String, required: true },
-    city: { type: String, required: true },
-    email: { type: String, required: true, unique: true, validate: [isEmail] },
     phone: { type: String, required: true },
-    gender: { type: String, required: true },
+    family: { type: String, required: true },
+    adult: { type: String },
+    children: { type: String },
+    car: { type: String, required: true },
+    service: { type: String, required: true },
     date: { type: String, required: true },
   },
   { timestamps: true }
