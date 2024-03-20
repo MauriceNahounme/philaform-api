@@ -9,7 +9,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://philaform.netlify.app",
+    origin: "*",
     credentials: true,
   })
 );
